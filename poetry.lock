@@ -31,9 +31,9 @@ dev = ["black (==22.6.0)", "build", "ipdb", "pip-chill", "pre-commit", "pylint",
 
 [package.source]
 type = "git"
-url = "https://github.com/jtraub91/bits"
+url = "https://github.com/jtraub91/bits.git"
 reference = "dev"
-resolved_reference = "22f1a3aeb9bb5ee13365676c05f42ef7ea7de13f"
+resolved_reference = "a11b3cdd4c5c9299b1e22060dcfad45013729d13"
 
 [[package]]
 name = "black"
@@ -750,4 +750,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "e4e69d3650e62c76c6da515fa6aa1a82f2b4d50f3ba0e8aeac87412741b95391"
+content-hash = "e8d54d4e4309f765f52b446d3e7493c32df2ff06e6799a0b881b5d81ff5cf073"

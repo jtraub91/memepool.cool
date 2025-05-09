@@ -10,7 +10,7 @@ requires-python = ">=3.13"
 dependencies = [
     "requests (>=2.32.3,<3.0.0)",
     "flask (>=3.1.0,<4.0.0)",
-    "bits @ git+https://github.com/jtraub91/bits@dev",
+    "bits @ git+https://github.com/jtraub91/bits.git@dev",
 ]
 
 [tool.poetry]
