@@ -7,21 +7,68 @@
     <title>memepool.cool</title>
 </head>
 <body>
-  <div id="mempool">
+  <style>
+    body {
+      font-family: monospace, sans-serif, serif;
+    }
+    #mempool {
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
+    
+    #loading {
+      font-size: 1.5em;
+      text-align: center;
+    }
 
-  </div>
-  <div id="loading">
-    Loading...
-  </div>
+    
+  </style>
+  <div id="mempool"><span id="loading">...</span></div>
+  
   <script>
+    function isInViewport(element) {
+      const bounding = element.getBoundingClientRect();
+      if (bounding.top == 0 && bounding.left == 0 && bounding.right == 0 && bounding.bottom == 0) {
+        return false;
+      }
+      return (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+      );
+    }
+    
     var mempool;
+    var txids = [];
+    var request_is_active = false;
+    const mempoolDiv = document.getElementById("mempool");
+    let loadingDiv = document.getElementById("loading");
+
     document.addEventListener("DOMContentLoaded", () => {
       fetch("/mempool").then((res) => res.json()).then((data) => {
         mempool = data;
-        const mempoolDiv = document.getElementById("mempool");
-        mempoolDiv.innerHTML = JSON.stringify(mempool, null, 2);
+        console.log(mempool);
       });
     });
+
+    setInterval(() => {
+      if (request_is_active) {
+        return;
+      }
+
+      if (isInViewport(loadingDiv)) {
+        request_is_active = true;
+        fetch("/tx/" + mempool.txids.pop()).then((res) => res.json()).then((data) => {
+          mempoolDiv.innerHTML += data.hex;
+          loadingDiv = document.createElement("span");
+          loadingDiv.id = "loading";
+          loadingDiv.innerText = "...";
+          mempoolDiv.appendChild(loadingDiv);
+        });
+        request_is_active = false;
+      }
+    }, 1000);
   </script>
 </body>
 </html>

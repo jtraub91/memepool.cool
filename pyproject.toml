@@ -1,7 +1,7 @@
 [project]
 name = "memepool-cool"
 version = "0.1.0"
-description = "a bitcoin mempool explorer"
+description = ""
 authors = [
     {name = "Jason Traub",email = "jtraub91@gmail.com"}
 ]
@@ -9,8 +9,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "requests (>=2.32.3,<3.0.0)",
-    "bits (>=0.2.1,<0.3.0)",
-    "flask (>=3.1.0,<4.0.0)"
+    "flask (>=3.1.0,<4.0.0)",
+    "bits @ git+https://github.com/jtraub91/bits@dev",
 ]
 
 [tool.poetry]
@@ -20,7 +20,6 @@ packages = [{include = "memepool"}]
 [tool.poetry.group.dev.dependencies]
 ipdb = "^0.13.13"
 black = "^25.1.0"
-pre-commit = "^4.2.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
